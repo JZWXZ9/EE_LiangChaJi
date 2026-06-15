@@ -1,0 +1,229 @@
+{
+  "feature": "Q4",
+  "threshold": 1.5,
+  "majority": "A",
+  "left": {
+    "feature": "Q6",
+    "threshold": 1.5,
+    "majority": "A",
+    "left": {
+      "feature": "Q8",
+      "threshold": 1.5,
+      "majority": "A",
+      "left": {
+        "feature": "Q3",
+        "threshold": 1.5,
+        "majority": "A",
+        "left": {
+          "feature": "Q1",
+          "threshold": 1.5,
+          "majority": "A",
+          "left": {
+            "feature": "Q9",
+            "threshold": 1.5,
+            "majority": "A",
+            "left": {
+              "feature": null,
+              "majority": "A"
+            },
+            "right": {
+              "feature": null,
+              "majority": "C"
+            }
+          },
+          "right": {
+            "feature": "Q1",
+            "threshold": 2.5,
+            "majority": "B",
+            "left": {
+              "feature": null,
+              "majority": "G"
+            },
+            "right": {
+              "feature": null,
+              "majority": "B"
+            }
+          }
+        },
+        "right": {
+          "feature": "Q5",
+          "threshold": 2.0,
+          "majority": "D",
+          "left": {
+            "feature": null,
+            "majority": "D"
+          },
+          "right": {
+            "feature": null,
+            "majority": "F"
+          }
+        }
+      },
+      "right": {
+        "feature": null,
+        "majority": "I"
+      }
+    },
+    "right": {
+      "feature": "Q7",
+      "threshold": 1.5,
+      "majority": "H",
+      "left": {
+        "feature": "Q9",
+        "threshold": 2.5,
+        "majority": "H",
+        "left": {
+          "feature": "Q3",
+          "threshold": 1.5,
+          "majority": "D",
+          "left": {
+            "feature": "Q6",
+            "threshold": 2.5,
+            "majority": "H",
+            "left": {
+              "feature": null,
+              "majority": "I"
+            },
+            "right": {
+              "feature": null,
+              "majority": "H"
+            }
+          },
+          "right": {
+            "feature": "Q10",
+            "threshold": 2.5,
+            "majority": "D",
+            "left": {
+              "feature": null,
+              "majority": "D"
+            },
+            "right": {
+              "feature": null,
+              "majority": "D"
+            }
+          }
+        },
+        "right": {
+          "feature": null,
+          "majority": "H"
+        }
+      },
+      "right": {
+        "feature": null,
+        "majority": "G"
+      }
+    }
+  },
+  "right": {
+    "feature": "Q2",
+    "threshold": 1.5,
+    "majority": "E",
+    "left": {
+      "feature": "Q10",
+      "threshold": 2.5,
+      "majority": "E",
+      "left": {
+        "feature": "Q10",
+        "threshold": 1.5,
+        "majority": "E",
+        "left": {
+          "feature": null,
+          "majority": "E"
+        },
+        "right": {
+          "feature": "Q4",
+          "threshold": 2.5,
+          "majority": "E",
+          "left": {
+            "feature": "Q3",
+            "threshold": 1.5,
+            "majority": "B",
+            "left": {
+              "feature": null,
+              "majority": "B"
+            },
+            "right": {
+              "feature": null,
+              "majority": "F"
+            }
+          },
+          "right": {
+            "feature": null,
+            "majority": "E"
+          }
+        }
+      },
+      "right": {
+        "feature": "Q1",
+        "threshold": 2.5,
+        "majority": "F",
+        "left": {
+          "feature": null,
+          "majority": "F"
+        },
+        "right": {
+          "feature": null,
+          "majority": "F"
+        }
+      }
+    },
+    "right": {
+      "feature": "Q1",
+      "threshold": 2.5,
+      "majority": "C",
+      "left": {
+        "feature": "Q2",
+        "threshold": 2.5,
+        "majority": "C",
+        "left": {
+          "feature": "F2",
+          "threshold": 0.5,
+          "majority": "B",
+          "left": {
+            "feature": null,
+            "majority": "B"
+          },
+          "right": {
+            "feature": null,
+            "majority": "C"
+          }
+        },
+        "right": {
+          "feature": null,
+          "majority": "C"
+        }
+      },
+      "right": {
+        "feature": "F2",
+        "threshold": 0.5,
+        "majority": "B",
+        "left": {
+          "feature": null,
+          "majority": "B"
+        },
+        "right": {
+          "feature": "Q2",
+          "threshold": 2.5,
+          "majority": "B",
+          "left": {
+            "feature": null,
+            "majority": "B"
+          },
+          "right": {
+            "feature": "Q8",
+            "threshold": 0.5,
+            "majority": "C",
+            "left": {
+              "feature": null,
+              "majority": "C"
+            },
+            "right": {
+              "feature": null,
+              "majority": "B"
+            }
+          }
+        }
+      }
+    }
+  }
+}
