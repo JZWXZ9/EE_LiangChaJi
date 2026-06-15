@@ -2,7 +2,8 @@
 
 > 日期：2026-06-15  
 > 版本：v1.0  
-> 关联文档：[proposal.md](../proposal.md) | [proof.md](../proof.md)
+> 关联文档：[proposal.md](../proposal.md) | [proof.md](../proof.md)  
+> **注意**：本文档中 `deploy/` 路径在阶段三已迁移至 `deploy_tree/`（决策树归档），当前 `deploy/` 为余弦相似度方案。详见 [dev_report_phase3.md](dev_report_phase3.md)。
 
 ---
 
