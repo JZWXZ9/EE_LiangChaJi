@@ -4169,6 +4169,17 @@ class CosSimClassifier:
 # ============================================================
 
 def main():
+    # 实例化FPIOA
+    fpioa = FPIOA()
+
+    # 为IO分配相应的硬件功能
+    fpioa.set_function(34, FPIOA.GPIO34)
+    fpioa.set_function(35, FPIOA.GPIO35)
+    fpioa.set_function(40,FPIOA.UART1_TXD)
+    fpioa.set_function(41,FPIOA.UART1_RXD)
+    fpioa.set_function(44,FPIOA.UART2_TXD)
+    fpioa.set_function(45,FPIOA.UART2_RXD)
+
     # 显示模式，默认"lcd"
     display_mode="lcd"
     display_size=[640,480]
@@ -4202,12 +4213,18 @@ def main():
         stop=UART.STOPBITS_ONE    # 停止位 1 位
     )
     # ========== 读取数据 ==========
-    answers = u1.readline()
-    u1.write(answers)
+    answers_code = None
+    print("11111")
+    while answers_code == None:
+        answers_code = u1.read(128)
+        time.sleep_ms(20)
+    answers = answers_code.decode()
+    print("get data:",answers)
     key_parts_dict = [0,0,0]
     if answers:
         try:
             while True:
+
                 u1.write("in")
                 os.exitpoint()
                 with ScopedTiming("total",1):
@@ -4251,6 +4268,7 @@ def main():
                         break
 
                     gc.collect()
+
         except Exception as e:
             sys.print_exception(e)
         finally:
