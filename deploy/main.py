@@ -6,6 +6,7 @@ from machine import Pin
 from machine import FPIOA
 from machine import RTC
 from machine import PWM
+from machine import UART
 import os
 import gc
 import time
@@ -3888,6 +3889,8 @@ class FaceLandMark:
 
         return h * 360.0, s * 100.0, l * 100.0
 
+
+
 Q_ENCODE = {"A": 0, "B": 1, "C": 2, "D": 3}
 Q_DECODE = {0: "A", 1: "B", 2: "C", 3: "D"}
 
@@ -4190,7 +4193,16 @@ def main():
     pl = PipeLine(rgb888p_size=rgb888p_size, display_size=display_size, display_mode=display_mode)
     pl.create(sensor=sensor)  # 创建PipeLine实例
     flm=FaceLandMark(face_det_kmodel_path,face_landmark_kmodel_path,det_input_size=face_det_input_size,landmark_input_size=face_landmark_input_size,anchors=anchors,confidence_threshold=confidence_threshold,nms_threshold=nms_threshold,rgb888p_size=rgb888p_size,display_size=display_size)
-    answers = []
+    # ========== 初始化 UART1 ==========
+    u1 = UART(
+        UART.UART1,           # UART1 通道
+        baudrate=115200,      # 波特率 115200
+        bits=UART.EIGHTBITS,  # 数据位 8 位
+        parity=UART.PARITY_NONE,  # 无校验
+        stop=UART.STOPBITS_ONE    # 停止位 1 位
+    )
+    # ========== 读取数据 ==========
+    answers = u1.readline()
     if answers:
         try:
             while True:
@@ -4249,6 +4261,10 @@ def main():
 
         # 查看与所有体质的相似度
         detail = clf.predict_with_scores(answers, key_parts_dict)
+        # ========== 发送数据 ==========
+        u1.write(result)  # 发送字符串
+        # ========== 释放资源 ==========
+        u1.deinit()
 
 
 
