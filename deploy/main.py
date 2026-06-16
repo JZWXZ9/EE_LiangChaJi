@@ -3906,57 +3906,7 @@ CONSTITUTION_NAMES = {
     "G": "血瘀质", "H": "气郁质", "I": "特禀质",
 }
 
-{
-    "_description": "九种体质标准模式（来源：proof.md 第六节 v1.1）。Q 编码 A=0/B=1/C=2/D=3；F 顺序 [舌苔, 眼圈, 脸色] = [F1, F2, F3]。",
-    "_core_weight": 2.0,
-    "constitutions": {
-        "A": {
-            "name": "平和质",
-            "standard": { "Q1": 0, "Q2": 0, "Q3": 0, "Q4": 0, "Q5": 0, "Q6": 0, "Q7": 0, "Q8": 0, "Q9": 0, "Q10": 0, "F1": 0, "F2": 0, "F3": 0 },
-            "core_features": []
-        },
-        "B": {
-            "name": "气虚质",
-            "standard": { "Q1": 3, "Q2": 2, "Q3": 0, "Q4": 2, "Q5": 0, "Q6": 1, "Q7": 0, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 0, "F3": 1 },
-            "core_features": ["Q1"]
-        },
-        "C": {
-            "name": "阳虚质",
-            "standard": { "Q1": 2, "Q2": 3, "Q3": 0, "Q4": 2, "Q5": 0, "Q6": 1, "Q7": 1, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 1, "F3": 1 },
-            "core_features": ["Q2"]
-        },
-        "D": {
-            "name": "阴虚质",
-            "standard": { "Q1": 2, "Q2": 0, "Q3": 3, "Q4": 0, "Q5": 0, "Q6": 1, "Q7": 0, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 1, "F3": 1 },
-            "core_features": ["Q3", "Q10"]
-        },
-        "E": {
-            "name": "痰湿质",
-            "standard": { "Q1": 2, "Q2": 0, "Q3": 0, "Q4": 3, "Q5": 2, "Q6": 1, "Q7": 0, "Q8": 0, "Q9": 2, "Q10": 1, "F1": 1, "F2": 1, "F3": 0 },
-            "core_features": ["Q4"]
-        },
-        "F": {
-            "name": "湿热质",
-            "standard": { "Q1": 2, "Q2": 0, "Q3": 2, "Q4": 2, "Q5": 3, "Q6": 1, "Q7": 0, "Q8": 1, "Q9": 2, "Q10": 3, "F1": 1, "F2": 0, "F3": 1 },
-            "core_features": ["Q5", "Q10"]
-        },
-        "G": {
-            "name": "血瘀质",
-            "standard": { "Q1": 2, "Q2": 1, "Q3": 0, "Q4": 0, "Q5": 0, "Q6": 2, "Q7": 3, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 1, "F3": 1 },
-            "core_features": ["Q7"]
-        },
-        "H": {
-            "name": "气郁质",
-            "standard": { "Q1": 2, "Q2": 0, "Q3": 1, "Q4": 0, "Q5": 0, "Q6": 3, "Q7": 0, "Q8": 1, "Q9": 3, "Q10": 2, "F1": 0, "F2": 0, "F3": 0 },
-            "core_features": ["Q6", "Q9"]
-        },
-        "I": {
-            "name": "特禀质",
-            "standard": { "Q1": 0, "Q2": 0, "Q3": 0, "Q4": 0, "Q5": 0, "Q6": 1, "Q7": 0, "Q8": 3, "Q9": 2, "Q10": 1, "F1": 0, "F2": 0, "F3": 0 },
-            "core_features": ["Q8"]
-        }
-    }
-}
+
 class CosSimClassifier:
     """基于加权余弦相似度的中医体质分类器。
 
@@ -3971,23 +3921,64 @@ class CosSimClassifier:
     # 平和质模长阈值：样本向量模长低于此值直接判为平和质
     PINGHE_NORM_THRESHOLD = 2.3
 
-    def __init__(self, patterns_path: str | None = None):
+    def __init__(self):
         """
         Args:
             patterns_path: 标准模式 JSON 文件路径。
                            默认取本文件同级目录下的 standard_patterns.json。
         """
-        if patterns_path is None:
-            patterns_path = os.path.join(
-                os.path.dirname(os.path.abspath(__file__)),
-                "standard_patterns.json",
-            )
 
-        if not os.path.exists(patterns_path):
-            raise FileNotFoundError(f"标准模式文件不存在: {patterns_path}")
-
-        with open(patterns_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
+        data = {
+            "_description": "九种体质标准模式（来源：proof.md 第六节 v1.1）。Q 编码 A=0/B=1/C=2/D=3；F 顺序 [舌苔, 眼圈, 脸色] = [F1, F2, F3]。",
+            "_core_weight": 2.0,
+            "constitutions": {
+                "A": {
+                    "name": "平和质",
+                    "standard": { "Q1": 0, "Q2": 0, "Q3": 0, "Q4": 0, "Q5": 0, "Q6": 0, "Q7": 0, "Q8": 0, "Q9": 0, "Q10": 0, "F1": 0, "F2": 0, "F3": 0 },
+                    "core_features": []
+                },
+                "B": {
+                    "name": "气虚质",
+                    "standard": { "Q1": 3, "Q2": 2, "Q3": 0, "Q4": 2, "Q5": 0, "Q6": 1, "Q7": 0, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 0, "F3": 1 },
+                    "core_features": ["Q1"]
+                },
+                "C": {
+                    "name": "阳虚质",
+                    "standard": { "Q1": 2, "Q2": 3, "Q3": 0, "Q4": 2, "Q5": 0, "Q6": 1, "Q7": 1, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 1, "F3": 1 },
+                    "core_features": ["Q2"]
+                },
+                "D": {
+                    "name": "阴虚质",
+                    "standard": { "Q1": 2, "Q2": 0, "Q3": 3, "Q4": 0, "Q5": 0, "Q6": 1, "Q7": 0, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 1, "F3": 1 },
+                    "core_features": ["Q3", "Q10"]
+                },
+                "E": {
+                    "name": "痰湿质",
+                    "standard": { "Q1": 2, "Q2": 0, "Q3": 0, "Q4": 3, "Q5": 2, "Q6": 1, "Q7": 0, "Q8": 0, "Q9": 2, "Q10": 1, "F1": 1, "F2": 1, "F3": 0 },
+                    "core_features": ["Q4"]
+                },
+                "F": {
+                    "name": "湿热质",
+                    "standard": { "Q1": 2, "Q2": 0, "Q3": 2, "Q4": 2, "Q5": 3, "Q6": 1, "Q7": 0, "Q8": 1, "Q9": 2, "Q10": 3, "F1": 1, "F2": 0, "F3": 1 },
+                    "core_features": ["Q5", "Q10"]
+                },
+                "G": {
+                    "name": "血瘀质",
+                    "standard": { "Q1": 2, "Q2": 1, "Q3": 0, "Q4": 0, "Q5": 0, "Q6": 2, "Q7": 3, "Q8": 0, "Q9": 2, "Q10": 2, "F1": 1, "F2": 1, "F3": 1 },
+                    "core_features": ["Q7"]
+                },
+                "H": {
+                    "name": "气郁质",
+                    "standard": { "Q1": 2, "Q2": 0, "Q3": 1, "Q4": 0, "Q5": 0, "Q6": 3, "Q7": 0, "Q8": 1, "Q9": 3, "Q10": 2, "F1": 0, "F2": 0, "F3": 0 },
+                    "core_features": ["Q6", "Q9"]
+                },
+                "I": {
+                    "name": "特禀质",
+                    "standard": { "Q1": 0, "Q2": 0, "Q3": 0, "Q4": 0, "Q5": 0, "Q6": 1, "Q7": 0, "Q8": 3, "Q9": 2, "Q10": 1, "F1": 0, "F2": 0, "F3": 0 },
+                    "core_features": ["Q8"]
+                }
+            }
+        }
 
         self._core_weight = float(data["_core_weight"])
         self._prototypes: dict[str, dict] = {}  # {code: {"name": ..., "vector": [...], "core_set": set}}
@@ -4133,7 +4124,7 @@ class CosSimClassifier:
         """校验输入格式。"""
         if not isinstance(answers, str) or len(answers) != 10:
             raise ValueError(
-                f"answers 必须是长度为 10 的字符串，实际长度: "
+                f"answers 必须是长度为 10 的字符串，实际长度: "+
                 f"{len(answers) if isinstance(answers, str) else 'N/A'}"
             )
         for i, ch in enumerate(answers):
@@ -4144,7 +4135,7 @@ class CosSimClassifier:
 
         if not isinstance(features, list) or len(features) != 3:
             raise ValueError(
-                f"features 必须是长度为 3 的列表，实际长度: "
+                f"features 必须是长度为 3 的列表，实际长度: "+
                 f"{len(features) if isinstance(features, list) else 'N/A'}"
             )
         for i, v in enumerate(features):
@@ -4207,14 +4198,13 @@ def main():
     # ========== 初始化 UART1 ==========
     u1 = UART(
         UART.UART1,           # UART1 通道
-        baudrate=115200,      # 波特率 115200
+        baudrate=9600,      # 波特率 115200
         bits=UART.EIGHTBITS,  # 数据位 8 位
         parity=UART.PARITY_NONE,  # 无校验
         stop=UART.STOPBITS_ONE    # 停止位 1 位
     )
     # ========== 读取数据 ==========
     answers_code = None
-    print("11111")
     while answers_code == None:
         answers_code = u1.read(128)
         time.sleep_ms(20)
@@ -4279,13 +4269,9 @@ def main():
         clf = CosSimClassifier()
 
         result = clf.predict(answers, key_parts_dict)
+        print(result)
+        u1.write(result)
 
-        # 查看与所有体质的相似度
-        detail = clf.predict_with_scores(answers, key_parts_dict)
-        # ========== 发送数据 ==========
-        u1.write(result)  # 发送字符串
-        # ========== 释放资源 ==========
-        u1.deinit()
 
 
 
