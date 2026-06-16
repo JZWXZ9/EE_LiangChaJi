@@ -4205,17 +4205,20 @@ def main():
     )
     # ========== 读取数据 ==========
     answers_code = None
+    answers = "A"
     while answers_code == None:
         answers_code = u1.read(128)
+        if answers_code != None:
+            answers = answers_code.decode()
+            if " " in answers:
+                answers_code = None
         time.sleep_ms(20)
-    answers = answers_code.decode()
+
     print("get data:",answers)
     key_parts_dict = [0,0,0]
     if answers:
         try:
             while True:
-
-                u1.write("in")
                 os.exitpoint()
                 with ScopedTiming("total",1):
                     #img是CHW格式，颜色模式是RGB
