@@ -122,6 +122,8 @@ cos(a, b_weighted) = (a · b_weighted) / (||a|| × ||b_weighted||)
 | 新建 | `deploy/example.py` | 余弦相似度使用示例 |
 | 更新 | `README.md` | 反映余弦相似度方案 |
 | 更新 | `proposal.md` | 补充余弦相似度方法说明 |
+| 重命名 | `doc/question.md` → `doc/question_design.md` | 原问题设计文档归档 |
+| 新建 | `doc/question.md` | 全英文问卷+茶指南（≤21字符/行排版）+中英对照附录 |
 
 ---
 
